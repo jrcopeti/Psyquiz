@@ -1,10 +1,34 @@
 <p style="color: green"><%= notice %></p>
+<% unless @current_question.nil? %>
+  <%= form_with(url: quiz_submissions_path(@quiz, question_id: @current_question.id), local: true, method: :post) do |form| %>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Question:</h5>
+        <p class="card-text"><%= @current_question.content %></p>
+        <% if @current_question.image.attached? %>
+          <%= image_tag @current_question.image, class: "img-fluid mb-3" %>
+        <% end %>
+        <% 1.upto(4) do |answer_index| %>
+          <div class="form-check">
+            <%= form.radio_button "question_#{@current_question.id}", answer_index, class: "form-check-input" %>
+            <%= form.label "question_#{@current_question.id}_#{answer_index}", @current_question.send("answer#{answer_index}"), class: "form-check-label" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-<%= render @quiz %>
+  <div class="text-center">
+    <%= form.submit "Submit Answer", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+<% else %>
+  <p>There are no questions for this quiz.</p>
+<% end %>
+
+
 
 <div>
   <%= link_to "Edit this quiz", edit_quiz_path(@quiz) %> |
   <%= link_to "Back to quizzes", quizzes_path %>
-
   <%= button_to "Destroy this quiz", @quiz, method: :delete %>
 </div>

@@ -1,10 +1,43 @@
 <p style="color: green"><%= notice %></p>
+<%# <h2>Your Quiz Score: <%= @submission.score.round(2) %>%</h2> %>
 
-<%= render @question %>
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Question:</h5>
+    <p class="card-text"><%= @current_question.content %></p>
+
+    <% if @current_question.image.attached? %>
+      <%= image_tag @current_question.image, class: "img-fluid mb-3" %>
+    <% end %>
+
+    <% 1.upto(4) do |answer_index| %>
+      <% selected_answer = @submission.user_answers[@current_question.id.to_s].to_i %>
+      <div class="form-check">
+        <% if answer_index == @current_question.correct_answer %>
+          <div class="alert alert-success">
+            <strong>Correct answer: </strong> <%= @current_question.send("answer#{answer_index}") %>
+          </div>
+        <% elsif answer_index == selected_answer %>
+          <div class="alert alert-danger">
+            <strong>Your answer (incorrect): </strong> <%= @current_question.send("answer#{answer_index}") %>
+          </div>
+        <% else %>
+          <div class="alert alert-secondary">
+            <%= @current_question.send("answer#{answer_index}") %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Add a link or button to proceed to the next question -->
+<%= link_to "Next Question", next_question_path %>
+
 
 <div>
-  <%= link_to "Edit this question", edit_question_path(@question) %> |
-  <%= link_to "Back to questions", questions_path %>
+  <%= link_to "Edit this question", edit_quiz_question_path(@question) %> |
+  <%= link_to "Back to questions", quiz_questions_path %>
 
-  <%= button_to "Destroy this question", @question, method: :delete %>
+  <%= button_to "Destroy this question", quiz_question_path, method: :delete %>
 </div>

@@ -8,6 +8,9 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1 or /questions/1.json
   def show
+    @quiz = Quiz.find(params[:quiz_id])
+    @question = @quiz.questions.find(params[:id])
+    @current_question = @quiz.questions.where("id > ?", params[:last_answered_question_id].to_i).first || @quiz.questions.first
   end
 
   # GET /questions/new

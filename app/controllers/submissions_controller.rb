@@ -1,46 +1,73 @@
 class SubmissionsController < ApplicationController
-  before_action :find_submission, only: %i[show create]
+  before_action :find_submission, only: %i[show]
+  before_action :find_quiz, only: %i[create review]
+
 
   def show
-    @quiz = @submissions.quiz
+    @quiz = @submission.quiz
+    @percentage_score = (@submission.score / @quiz.questions.count) * 100
   end
 
   def create
-    @quiz = Quiz.find(params[:quiz_id])
-    user_answers = {}
-    correct_answer = 0
+    # Find the current question
+    @question = Question.find(params[:question_id])
 
-    params.each do |key, value|
-      if key.start_with?('question_')
-        question_id = key.split('_').last.to_i
-        selected_answer = value.to_i
-        user_answers[question_id.to_s] = selected_answer
-        question = Question.find(question_id)
+    # Check if the answer is correct
+    is_correct = @question.correct_answer == params["question_#{@question.id}"].to_i
 
-        if question.correct_answer == selected_answer
-          correct_answer += 1
-        end
-      end
+    # Find an ongoing submission or initialize a new one
+    @submission = Submission.find_or_initialize_by(quiz: @quiz, user: current_user)
+
+    # set score to 0 everytime user starts a new submission
+    if @question == @quiz.questions.first
+      @submission.score = 0
     end
 
-    score = (correct_answer.to_f / @quiz.questions.count) * 100
+    # Update score if the answer is correct
+    @submission.score += 1 if is_correct
 
-    submission = Submission.create(
-      quiz: @quiz,
-      user: current_user,
-      score:,
-      user_answers:
-    )
+    # Update or add the answer to user_answers
+    user_answers = @submission.user_answers || {}
+    user_answers[@question.id.to_s] = params["question_#{@question.id}"]
+    @submission.user_answers = user_answers
 
-    redirect_to submission_path(@quiz, submission)
+    @submission.save
+
+    # Store the current question ID in the session
+    session[:current_question_id] = @question.id
+
+    # Move to the next question or end the quiz
+    next_question = @quiz.questions.where("id > ?", @question.id).first
+
+    if next_question
+      redirect_to review_quiz_submission_path(@quiz, @submission, next_question_id: next_question.id)
+    else
+      redirect_to quiz_submission_path(@quiz, @submission)
+    end
+  end
+
+  def review
+    @submission = Submission.find(params[:id])
+    @question = @submission.quiz.questions.find_by(id: session[:current_question_id])
+    @next_question_id = params[:next_question_id]
+    # Clear the session
+    session.delete(:current_question_id)
+    @percentage_score = (@submission.score / @quiz.questions.count) * 100
 
   end
 
   private
 
-  # gets quiz submission from database
   def find_submission
     @submission = Submission.find(params[:id])
+  end
+
+  def find_quiz
+    @quiz = Quiz.find(params[:quiz_id])
+  end
+
+  def current_question
+    @question = Question.find(params[:question_id])
   end
 
   def submission_params
