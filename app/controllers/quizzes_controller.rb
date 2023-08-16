@@ -8,6 +8,14 @@ class QuizzesController < ApplicationController
 
   # GET /quizzes/1 or /quizzes/1.json
   def show
+  # If a current_question_id is provided, find that question. Otherwise, find the first question of the quiz.
+    @current_question = if params[:current_question_id]
+                          Question.find(params[:current_question_id])
+                        else
+                          @quiz.questions.first
+                        end
+
+    flash[:alert] = "This quiz has no questions." if @current_question.nil?
   end
 
   # GET /quizzes/new

@@ -79,3 +79,5 @@ group :test do
 end
 
 
+
+gem "byebug", "~> 11.1", :groups => [:development, :test]
