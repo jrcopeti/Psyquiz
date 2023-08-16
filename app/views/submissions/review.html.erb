@@ -25,4 +25,6 @@
       <% end %>
     </div>
 </div>
-<%= link_to "Proceed to Next Question", quiz_path(@submission.quiz, current_question_id: @next_question_id), class: "btn btn-primary" %>
+<div class="text-center">
+  <%= link_to "Proceed to Next Question", quiz_path(@submission.quiz, current_question_id: @next_question_id), class: "btn btn-primary" %>
+</div>

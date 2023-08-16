@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Goals</h1>
+
+<div id="goals">
+  <% @goals.each do |goal| %>
+    <%= render goal %>
+    <p>
+      <%= link_to "Show this goal", goal %>
+    </p>
+  <% end %>
+  <div>
+    <%= link_to "Back to home", root_path %>
+  </div>
+</div>
