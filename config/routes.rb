@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :quizzes do
+    collection do
+      get :track_users
+    end
     resources :questions
     resources :submissions, only: %i[show create], as: 'submissions' do
       member do

@@ -1,9 +1,17 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: %i[ show edit update destroy ]
+  before_action :check_admin, only: %i[new create edit update destroy track_users]
+
 
   # GET /quizzes or /quizzes.json
   def index
     @quizzes = Quiz.all
+    @submissions = current_user.submissions.where(quiz: @quizzes).index_by(&:quiz_id)
+    @percentage_scores = {}
+    @submissions.each do |quiz_id, submission|
+      quiz = Quiz.find(quiz_id)
+      @percentage_scores[quiz_id] = (submission.score / quiz.questions.count) * 100
+    end
   end
 
   # GET /quizzes/1 or /quizzes/1.json
@@ -67,6 +75,10 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def track_users
+    @quizzes = Quiz.includes(submissions: :user).all
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
@@ -91,4 +103,10 @@ class QuizzesController < ApplicationController
         ]
       )
     end
+
+  def check_admin
+    unless current_user.admin?
+      redirect_to root_path, alert: "You don't have permission to perform this action."
+    end
+  end
 end

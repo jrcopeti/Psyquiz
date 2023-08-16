@@ -1,14 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Quizzes</h1>
-
 <div id="quizzes">
   <% @quizzes.each do |quiz| %>
     <%= render quiz %>
     <p>
       <%= link_to "Show this quiz", quiz %>
     </p>
+    <% submission = @submissions[quiz.id] %>
+    <% if submission&.completed? %>
+      <p>You have completed this quiz!</p>
+      <p>Your score: <%= @percentage_scores[quiz.id].to_i %>%</p>
+    <% else %>
+      <p>Start the quiz!</p>
+    <% end %>
   <% end %>
 </div>
 
-<%= link_to "New quiz", new_quiz_path %>
+<%= link_to 'create new quiz', new_quiz_path %>
+
+<%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
