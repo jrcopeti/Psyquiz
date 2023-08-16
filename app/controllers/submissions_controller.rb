@@ -2,7 +2,6 @@ class SubmissionsController < ApplicationController
   before_action :find_submission, only: %i[show]
   before_action :find_quiz, only: %i[create review]
 
-
   def show
     @quiz = @submission.quiz
   end
