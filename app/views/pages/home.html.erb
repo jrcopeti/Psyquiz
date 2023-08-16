@@ -1,5 +1,9 @@
-<h1>Pages#home</h1>
+<h1>Welcome, <%= current_user.name %></h1>
 
-<%= link_to "Show all quiz", quizzes_path %>
+<%= link_to "Show all quizzes", quizzes_path, class: "btn btn-primary btn-lg" %>
 
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<% if current_user.admin? %>
+  <%= link_to 'Track User Quizzes', track_users_quizzes_path %>
+<% end %>

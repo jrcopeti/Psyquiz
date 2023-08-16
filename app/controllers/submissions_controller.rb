@@ -5,7 +5,6 @@ class SubmissionsController < ApplicationController
 
   def show
     @quiz = @submission.quiz
-    @percentage_score = (@submission.score / @quiz.questions.count) * 100
   end
 
   def create

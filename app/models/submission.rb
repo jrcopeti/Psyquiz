@@ -5,4 +5,8 @@ class Submission < ApplicationRecord
   def init
     self.user_answers ||= {}
   end
+
+  def percentage_score
+    ((self.score / quiz.questions.count) * 100).to_i
+  end
 end
