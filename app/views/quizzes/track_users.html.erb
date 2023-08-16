@@ -10,27 +10,25 @@
   </thead>
   <tbody>
     <% @quizzes.each do |quiz| %>
-      <% if quiz.submissions.any? %>
-        <% quiz.submissions.each do |submission| %>
-          <tr>
-            <td><%= quiz.title %></td>
-            <td> <%= submission.user.name %></td>
-
-              <% percentage = submission.percentage_score %>
-              <% if percentage < 25 %>
-               <td class="text-danger"> Poor Performance </td>
-              <%else %>
-                <td class="text-success"><%= "#{percentage}% Correct" %></td>
-              <% end %>
-          </tr>
-        <% end %>
-      <% else %>
+      <% @users.each do |user| %>
         <tr>
           <td><%= quiz.title %></td>
-          <td colspan="2" class="text-warning">Quiz not taken yet</td>
-          <td>-</td>
+          <td><%= user.name %></td>
+          <% submission = quiz.submissions.find_by(user: user) %>
+          <% if submission %>
+            <% percentage = submission.percentage_score %>
+            <% if percentage < 25 %>
+              <td class="text-danger">Poor Performance</td>
+            <% else %>
+              <td class="text-success"><%= "#{percentage}% Correct" %></td>
+            <% end %>
+          <% else %>
+            <td class="text-secondary">Quiz not taken yet</td>
+          <% end %>
         </tr>
       <% end %>
     <% end %>
   </tbody>
 </table>
+
+<%= link_to "Back to home", root_path %>

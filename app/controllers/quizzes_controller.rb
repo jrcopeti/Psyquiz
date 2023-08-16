@@ -22,7 +22,7 @@ class QuizzesController < ApplicationController
                         else
                           @quiz.questions.first
                         end
-
+\
     flash[:alert] = "This quiz has no questions." if @current_question.nil?
   end
 
@@ -76,7 +76,8 @@ class QuizzesController < ApplicationController
   end
 
   def track_users
-    @quizzes = Quiz.includes(submissions: :user).all
+    @quizzes = Quiz.all
+    @users = User.order(:name)
   end
 
   private

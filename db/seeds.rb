@@ -5,12 +5,14 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-puts 'Goals, submission, questions, quizzes, users'
+puts 'deleting Goals, submission, questions, quizzes, users'
 Goal.delete_all
 Submission.delete_all
 Question.delete_all
 Quiz.delete_all
 User.delete_all
+
+puts 'creating users'
 
 psychiatrist = User.create!(
   email: 'bob@gmail.com',
@@ -28,6 +30,7 @@ user = User.create!(
   admin: false
 )
 
+puts 'creating quiz'
 quiz1 = Quiz.create!(title: 'Capitals')
 questions_data1 = [
   {
@@ -235,7 +238,6 @@ end
 
 quiz5 = Quiz.create!(title: "History")
 
-# Questions about general history
 questions_data5 = [
   {
     content: "Who was the first president of the United States?",
@@ -283,6 +285,8 @@ questions_data5.each do |question_data|
   quiz5.questions.create!(question_data)
 end
 
+puts 'creating goals'
+
 Goal.create!(
   title: 'Drink more water',
   description: 'At least 2 liters a day!'
@@ -317,3 +321,5 @@ Goal.create!(
   title: 'Meditate',
   description: '10 minutes a day'
 )
+
+puts 'database successfully seeded!'
