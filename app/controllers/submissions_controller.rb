@@ -21,6 +21,7 @@ class SubmissionsController < ApplicationController
     # set score to 0 everytime user starts a new submission
     if @question == @quiz.questions.first
       @submission.score = 0
+      @submission.completed = false
     end
 
     # Update score if the answer is correct
@@ -42,6 +43,7 @@ class SubmissionsController < ApplicationController
     if next_question
       redirect_to review_quiz_submission_path(@quiz, @submission, next_question_id: next_question.id)
     else
+      @submission.update(completed: true)
       redirect_to quiz_submission_path(@quiz, @submission)
     end
   end
@@ -53,7 +55,6 @@ class SubmissionsController < ApplicationController
     # Clear the session
     session.delete(:current_question_id)
     @percentage_score = (@submission.score / @quiz.questions.count) * 100
-
   end
 
   private
@@ -64,10 +65,6 @@ class SubmissionsController < ApplicationController
 
   def find_quiz
     @quiz = Quiz.find(params[:quiz_id])
-  end
-
-  def current_question
-    @question = Question.find(params[:question_id])
   end
 
   def submission_params

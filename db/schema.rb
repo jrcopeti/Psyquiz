@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_190819) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_051112) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_190819) do
     t.json "user_answers"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "completed", default: false, null: false
     t.index ["quiz_id"], name: "index_submissions_on_quiz_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end

@@ -4,6 +4,12 @@ class QuizzesController < ApplicationController
   # GET /quizzes or /quizzes.json
   def index
     @quizzes = Quiz.all
+    @submissions = current_user.submissions.where(quiz: @quizzes).index_by(&:quiz_id)
+    @percentage_scores = {}
+    @submissions.each do |quiz_id, submission|
+      quiz = Quiz.find(quiz_id)
+      @percentage_scores[quiz_id] = (submission.score / quiz.questions.count) * 100
+    end
   end
 
   # GET /quizzes/1 or /quizzes/1.json
