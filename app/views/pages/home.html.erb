@@ -1,6 +1,6 @@
 <h1>Welcome, <%= current_user.name %></h1>
 <br>
-<%= link_to "Show all quizzes", quizzes_path, class: "btn btn-primary btn-lg" %>
+<%= link_to "Go to Quizzes", quizzes_path, class: "btn btn-primary btn-lg" %>
 
 
 <% if !current_user.admin? %>

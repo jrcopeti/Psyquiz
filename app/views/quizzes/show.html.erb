@@ -24,6 +24,12 @@
   <p>There are no questions for this quiz.</p>
 <% end %>
 
+<br>
+
+<div>
+   <%= link_to "Back to quizzes", quizzes_path, class: "btn btn-secondary btn-sm" %>
+</div>
+
 
 <% if current_user.admin? %>
   <div>
