@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: %i[ show edit update destroy`]
+  before_action :set_goal, only: %i[ show edit update destroy]
   before_action :check_admin, only: %i[new create edit update destroy]
 
   # GET /goals or /goals.json

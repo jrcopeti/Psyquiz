@@ -7,13 +7,13 @@
     </p>
     <% submission = @submissions[quiz.id] %>
     <% if submission&.completed? %>
-      <p class="text-success">You have completed this quiz!</p>
+      <h6 class="text-success">You have completed this quiz!</h6>
       <p>Your score: <%= @percentage_scores[quiz.id].to_i %>%</p>
     <% else %>
-      <p>Start the quiz!</p>
+      <p>Start the quiz!<span class="text-white bg-warning badge badge-primary">New</span></p>
     <% end %>
   <% end %>
   <div>
-    <%=link_to "back to home", root_path  %>
+    <%=link_to "back to home", root_path, class: "btn btn-secondary btn-sm"  %>
   </div>
 </div>
