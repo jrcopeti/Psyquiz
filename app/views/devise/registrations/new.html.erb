@@ -23,10 +23,16 @@
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
+    <%= f.input :admin,
+                required: false,
+                autofocus: true,
+                label: "Psychiatrist? (leave it blank if not)",
+                input_html: { autocomplete: "admin" }
+                %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Sign up", class: "mb-2 btn btn-primary" %>
   </div>
 <% end %>
 
