@@ -11,3 +11,5 @@ export default class extends Controller {
     this.submitTarget.disabled = !isAnyAnswerChecked;
   }
 }
+
+// code for checking answers 
