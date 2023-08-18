@@ -1,5 +1,5 @@
 <% unless @current_question.nil? %>
-  <%= form_with(url: quiz_submissions_path(@quiz, question_id: @current_question.id), local: true, method: :post) do |form| %>
+<%= form_with(url: quiz_submissions_path(@quiz, question_id: @current_question.id), local: true, method: :post, data: { controller: "answer-check" }) do |form| %>
     <div class="card mb-4">
       <div class="card-body">
         <h5 class="card-title">Question:</h5>
@@ -7,17 +7,17 @@
         <% if @current_question.image.attached? %>
           <%= image_tag @current_question.image, class: "img-fluid mb-3" %>
         <% end %>
-        <% 1.upto(4) do |answer_index| %>
-          <div class="form-check">
-            <%= form.radio_button "question_#{@current_question.id}", answer_index, class: "form-check-input" %>
-            <%= form.label "question_#{@current_question.id}_#{answer_index}", @current_question.send("answer#{answer_index}"), class: "form-check-label" %>
-          </div>
-        <% end %>
+       <% 1.upto(4) do |answer_index| %>
+        <div class="form-check">
+        <%= form.radio_button "question_#{@current_question.id}", answer_index, class: "form-check-input", data: { answer_check_target: "answer", action: "click->answer-check#checkAnswers" } %>
+        <%= form.label "question_#{@current_question.id}_#{answer_index}", @current_question.send("answer#{answer_index}"), class: "form-check-label" %>
+        </div>
+      <% end %>
       </div>
     </div>
 
   <div class="text-center">
-    <%= form.submit "Submit Answer", class: "btn btn-primary" %>
+  <%= form.submit "Submit Answer", class: "btn btn-primary", data: { answer_check_target: "submit" } %>
   </div>
   <% end %>
 <% else %>
@@ -38,3 +38,5 @@
     <%= button_to "Destroy this quiz", @quiz, method: :delete %>
   </div>
 <% end %>
+
+

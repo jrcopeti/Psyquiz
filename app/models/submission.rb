@@ -1,6 +1,8 @@
 class Submission < ApplicationRecord
   belongs_to :user
   belongs_to :quiz
+  validates :user_answers, presence: true
+  
 
   def init
     self.user_answers ||= {}
