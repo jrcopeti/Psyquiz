@@ -37,6 +37,12 @@ Psyquiz is a dynamic and intuitive app designed to enable admins to set quizzes 
     bundle install
     ```
 
+3. Run migration and seed
+    ```bash
+    rails db:migrate db:seed
+    ```
+
+
 4. Start the application:
     ```bash
     rails s
