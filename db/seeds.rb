@@ -14,7 +14,7 @@ User.delete_all
 
 puts 'creating users'
 
-psychiatrist = User.create!(
+admin = User.create!(
   email: 'bob@gmail.com',
   password: 'p123456',
   name: 'Bob',
@@ -283,6 +283,201 @@ questions_data5 = [
 
 questions_data5.each do |question_data|
   quiz5.questions.create!(question_data)
+end
+
+quiz6 = Quiz.create!(title: "Animals")
+
+questions_data6 = [
+  {
+    content: "Which animal is known as the 'King of the Jungle'?",
+    answer1: "Lion",
+    answer2: "Tiger",
+    answer3: "Cheetah",
+    answer4: "Panther",
+    correct_answer: 1
+  },
+  {
+    content: "What is the largest mammal on Earth?",
+    answer1: "African Elephant",
+    answer2: "Whale Shark",
+    answer3: "Giraffe",
+    answer4: "Blue Whale",
+    correct_answer: 4
+  },
+  {
+    content: "Which bird is known for its beautiful tail feathers and courtship dance?",
+    answer1: "Peacock",
+    answer2: "Parrot",
+    answer3: "Swan",
+    answer4: "Penguin",
+    correct_answer: 1
+  },
+  {
+    content: "How many legs does a spider typically have?",
+    answer1: "6",
+    answer2: "8",
+    answer3: "10",
+    answer4: "4",
+    correct_answer: 2
+  },
+  {
+    content: "Which animal is known to carry its house on its back?",
+    answer1: "Snail",
+    answer2: "Tortoise",
+    answer3: "Kangaroo",
+    answer4: "Hermit Crab",
+    correct_answer: 2
+  }
+]
+questions_data6.each do |question_data|
+  quiz6.questions.create!(question_data)
+end
+
+quiz7 = Quiz.create!(title: "Natural Wonders")
+
+questions_data7 = [
+  {
+    content: "Where can you find the Grand Canyon?",
+    answer1: "Australia",
+    answer2: "Canada",
+    answer3: "USA",
+    answer4: "Russia",
+    correct_answer: 3
+  },
+  {
+    content: "What is the world's highest waterfall?",
+    answer1: "Victoria Falls",
+    answer2: "Niagara Falls",
+    answer3: "Iguazu Falls",
+    answer4: "Angel Falls",
+    correct_answer: 4
+  },
+  {
+    content: "Where is the Great Barrier Reef located?",
+    answer1: "Brazil",
+    answer2: "Australia",
+    answer3: "South Africa",
+    answer4: "Philippines",
+    correct_answer: 2
+  },
+  {
+    content: "Which mountain is known as the 'Roof of the World'?",
+    answer1: "Mount Kilimanjaro",
+    answer2: "Mount Everest",
+    answer3: "K2",
+    answer4: "Mount Fuji",
+    correct_answer: 2
+  },
+  {
+    content: "Which desert is the largest hot desert in the world?",
+    answer1: "Sahara",
+    answer2: "Kalahari",
+    answer3: "Sonoran",
+    answer4: "Gobi",
+    correct_answer: 1
+  }
+]
+
+questions_data7.each do |question_data|
+  quiz7.questions.create!(question_data)
+end
+
+quiz8 = Quiz.create!(title: "Famous actors/actress")
+
+questions_data8 = [
+  {
+    content: "Who played the character Jack Dawson in Titanic?",
+    answer1: "Brad Pitt",
+    answer2: "Tom Cruise",
+    answer3: "Johnny Depp",
+    answer4: "Leonardo DiCaprio",
+    correct_answer: 4
+  },
+  {
+    content: "Which actress starred in the movie 'Pretty Woman'?",
+    answer1: "Julia Roberts",
+    answer2: "Sandra Bullock",
+    answer3: "Nicole Kidman",
+    answer4: "Meryl Streep",
+    correct_answer: 1
+  },
+  {
+    content: "Who played the main character in 'The Matrix'?",
+    answer1: "Keanu Reeves",
+    answer2: "Robert Downey Jr.",
+    answer3: "Will Smith",
+    answer4: "Hugh Jackman",
+    correct_answer: 1
+  },
+  {
+    content: "Which actor is known for his role as Wolverine in the X-Men series?",
+    answer1: "Chris Hemsworth",
+    answer2: "Chris Evans",
+    answer3: "Hugh Jackman",
+    answer4: "Ryan Reynolds",
+    correct_answer: 3
+  },
+  {
+    content: "Which actress played the lead role in 'La La Land'?",
+    answer1: "Emma Stone",
+    answer2: "Anne Hathaway",
+    answer3: "Scarlett Johansson",
+    answer4: "Jennifer Lawrence",
+    correct_answer: 1
+  }
+]
+
+questions_data8.each do |question_data|
+  quiz8.questions.create!(question_data)
+end
+
+quiz9 = Quiz.create!(title: "Food from around the world")
+
+questions_data9 = [
+  {
+    content: "Which country is known for its sushi?",
+    answer1: "China",
+    answer2: "South Korea",
+    answer3: "Japan",
+    answer4: "Thailand",
+    correct_answer: 3
+  },
+  {
+    content: "Tacos are a traditional food from which country?",
+    answer1: "Spain",
+    answer2: "Italy",
+    answer3: "Brazil",
+    answer4: "Mexico",
+    correct_answer: 4
+  },
+  {
+    content: "Which dish made of thinly sliced raw fish is a delicacy in Italy?",
+    answer1: "Sashimi",
+    answer2: "Ceviche",
+    answer3: "Carpaccio",
+    answer4: "Poke",
+    correct_answer: 3
+  },
+  {
+    content: "Croissant is associated with which country's cuisine?",
+    answer1: "Germany",
+    answer2: "France",
+    answer3: "Belgium",
+    answer4: "Austria",
+    correct_answer: 2
+  },
+  {
+    content: "Which dessert consists of deep-fried dough soaked in sugar syrup or honey, often flavored with cinnamon and served with walnuts?",
+    answer1: "Cannoli",
+    answer2: "Gelato",
+    answer3: "Baklava",
+    answer4: "Tiramisu",
+    correct_answer: 3
+  }
+]
+
+questions_data8.each do |question_data|
+  quiz8.questions.create!(question_data)
 end
 
 puts 'creating goals'

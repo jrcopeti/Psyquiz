@@ -1,4 +1,6 @@
-<h1 mb-4>Quizzes</h1>
+<div class="d-flex m-4 justify-content-center">
+  <h1  >Quiz Arena</h1>
+</div>
 
 <div id="quizzes" class="row">
   <% @quizzes.each do |quiz| %>
@@ -9,7 +11,7 @@
 
           <% submission = @submissions[quiz.id] %>
           <% if submission&.completed? %>
-            <h6 class="text-success">You have completed this quiz!</h6>
+            <h6 class="text-success">You have completed this quiz! </h6>
             <p class="mb-3">Your score: <%= @percentage_scores[quiz.id].to_i %>% correct</p>
             <%= link_to "Review", quiz, class: "btn btn-secondary btn-block" %>
           <% else %>
@@ -23,6 +25,6 @@
   <% end %>
 </div>
 
-<div class="mt-4">
+<div class="mt-4 mb-4">
   <%= link_to "Back to Home", root_path, class: "btn btn-secondary btn-sm" %>
 </div>

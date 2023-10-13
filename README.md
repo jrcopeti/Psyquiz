@@ -1,30 +1,44 @@
-Psyquiz
-App built on Ruby on Rails to enable psychiatrists to interact with their
-clients through quizzes, as well as set goals for them to adhere to.
+# Psyquiz
 
-Prerequisites
-Ruby ruby 3.1.2p20
-Rails Rails 7.0.7
-PostgreSQL
-Bundler 2.4.5
-Yarn 1.22.19
+Psyquiz is a dynamic and intuitive app designed to enable admins to set quizzes for users. It provides instant feedback to users about the correctness of their answers, and dynamically updates goals every 5 minutes.
 
-Setup & Installation
-Clone the repository
-git clone https://github.com/your-username/Psyquiz.git
-cd Psyquiz
-Install dependencies
-Bundle install
-Yarn install
+![Screenshot](app/assets/images/homepage.png)
+![Screenshot](app/assets/images/quiz-arena.png)
 
-Setup Database
-rails db:create db:migrate db:seed (if data is wanted)
+## Features
 
-Start the server rails s
+- **User Features**:
+  - Take quizzes set by the admin.
+  - Receive immediate feedback upon answering each quiz question.
+  - View dynamically updated goals that refresh every 5 minutes.
 
-User admin (psychiatrist) login is:
-email: bob@gmail.com
-password: p123456
+- **Admin Features**:
+  - Create, update, and delete quizzes and goals.
+  - Track the performance of users through analytics.
 
-To create another admin, use rails c and set it manually
+  ![Screenshot](app/assets/images/correct-question.png)
+  ![Screenshot](app/assets/images/correct-answer.png)
+  ![Screenshot](app/assets/images/wrong-answer.png)
 
+## Installation & Setup
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/Psyquiz.git
+    ```
+
+2. Navigate into the directory:
+    ```bash
+    cd Psyquiz
+    ```
+
+3. Install the required dependencies
+    ```bash
+    bundle install
+    ```
+
+4. Start the application:
+    ```bash
+    rails s
+    webpack build --watch
+    ```
