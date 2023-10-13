@@ -1,19 +1,28 @@
-<h1>Quizzes</h1>
-<div id="quizzes">
+<h1 mb-4>Quizzes</h1>
+
+<div id="quizzes" class="row">
   <% @quizzes.each do |quiz| %>
-    <%= render quiz %>
-    <p>
-      <%= link_to "Take this Quiz", quiz, class: "btn btn-primary" %>
-    </p>
-    <% submission = @submissions[quiz.id] %>
-    <% if submission&.completed? %>
-      <h6 class="text-success">You have completed this quiz!</h6>
-      <p>Your score: <%= @percentage_scores[quiz.id].to_i %>%</p>
-    <% else %>
-      <p>Start the quiz!<span class="text-white bg-warning badge badge-primary">New</span></p>
-    <% end %>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <%= render quiz %>
+
+          <% submission = @submissions[quiz.id] %>
+          <% if submission&.completed? %>
+            <h6 class="text-success">You have completed this quiz!</h6>
+            <p class="mb-3">Your score: <%= @percentage_scores[quiz.id].to_i %>% correct</p>
+            <%= link_to "Review", quiz, class: "btn btn-secondary btn-block" %>
+          <% else %>
+          <h6 class="text-secondary">You haven't started this quiz! <span class=" text-white bg-warning badge badge-primary">New</span></h6>
+            <p class="mb-3">Your score: 0% </p>
+            <%= link_to "Start", quiz, class: "btn btn-primary btn-block" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
-  <div>
-    <%=link_to "back to home", root_path, class: "btn btn-secondary btn-sm"  %>
-  </div>
+</div>
+
+<div class="mt-4">
+  <%= link_to "Back to Home", root_path, class: "btn btn-secondary btn-sm" %>
 </div>

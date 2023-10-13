@@ -1,3 +1,4 @@
+
 <% unless @current_question.nil? %>
 <%= form_with(url: quiz_submissions_path(@quiz, question_id: @current_question.id), local: true, method: :post, data: { controller: "answer-check" }) do |form| %>
     <div class="card mb-4">
@@ -38,5 +39,3 @@
     <%= button_to "Destroy this quiz", @quiz, method: :delete %>
   </div>
 <% end %>
-
-
