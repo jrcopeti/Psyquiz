@@ -35,6 +35,7 @@ Psyquiz is a dynamic and intuitive app designed to enable admins to set quizzes 
 3. Install the required dependencies
     ```bash
     bundle install
+    yarn install
     ```
 
 3. Run migration and seed
